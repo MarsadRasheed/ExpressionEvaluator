@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class node{
+public:
+	int data;
+	node* next;
+	node* previous;
+};
+
+class LinkedList
+{
+private:
+	node* head;
+	node* tail;
+public:
+
+	LinkedList() {
+		head = NULL;
+		tail = NULL;
+	}
+
+	void add(char word);
+	char remove();
+	void print();
+	char top();
+
+	bool empty() {
+		if (!this->head) {
+			return true;
+		}
+		return false;
+	}
+};
+
+
+void LinkedList::add(char word) {
+
+	node* ptr;
+	ptr = head;
+
+	node* temp = new node;
+	temp->data = word;
+	temp->next = NULL;
+
+	if (head == NULL) {
+		head = temp;
+		tail = temp;
+	}
+	tail->next = temp;
+	temp->next = NULL;
+	tail = temp;
+}
+
+
+void LinkedList::print() {
+	node* temp;
+	temp = head;
+
+	if (temp == NULL) {
+		std::cout << "\n list is empty\n ";
+	}
+	else {
+		while (temp != NULL) {
+			std::cout << temp->data << " ";
+			temp = temp->next;
+		}
+	}
+}
