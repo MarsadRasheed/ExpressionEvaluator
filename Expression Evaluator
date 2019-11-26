@@ -34,6 +34,7 @@ public:
 	}
 };
 
+// function defination for addition of  node
 
 void LinkedList::add(char word) {
 
@@ -53,6 +54,7 @@ void LinkedList::add(char word) {
 	tail = temp;
 }
 
+// function defination for deletion of node
 
 char LinkedList::remove() {
 
@@ -88,6 +90,7 @@ char LinkedList::remove() {
 	}
 }
 
+// function defination to print list
 
 void LinkedList::print() {
 	node* temp;
@@ -104,6 +107,7 @@ void LinkedList::print() {
 	}
 }
 
+// function defination to get top of list
 
 char LinkedList::top() {
 	if (!empty()) {
