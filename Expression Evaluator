@@ -116,3 +116,36 @@ char LinkedList::top() {
 	return 't';
 }
 
+// stack class 
+
+class Stack{
+
+public:
+	LinkedList l;        
+	bool emptyStack() {           // empty stack function using linkedList
+		bool check;
+		check = l.empty();
+		return check;
+	}
+
+	void push(char a) {                 // insertion function using linked/list
+		l.add(a);
+	}
+
+	char pop() {                        // deletion function using linkedList
+		char deleted;
+		deleted = l.remove();
+		return deleted;
+	}
+
+	void print() {                       // print stack using linkedList
+		l.print();
+	}
+
+	char peek() {                       // getting top value in list 
+		char word; 
+		word = l.top();
+		return word;
+	}
+
+};
