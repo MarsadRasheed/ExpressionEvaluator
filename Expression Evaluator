@@ -149,3 +149,44 @@ public:
 	}
 
 };
+
+// check operand funcion defination
+
+bool isOperand(char digit) {
+	
+	if (digit >= '0' && digit <= '9') {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// check operator function defination
+
+bool isOperator(char digit) {
+	
+	if (digit == '+' || digit == '-' || digit == '*' || digit == '/') {
+		return true;
+	}
+	else {
+		return false;
+	}
+	
+}
+
+// function defination for getting precedence order of operators 
+
+int precedenceOrder(char digit) {
+
+	if (digit == '+' || digit == '-') {
+		return 1;
+	}
+	else if (digit == '*' || digit == '/') {
+		return 2;
+	}
+	else {
+		return -1;
+	}
+
+}
