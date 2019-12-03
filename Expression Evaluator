@@ -240,3 +240,60 @@ string infixToPostfix(string expression) {
 	return postfix;
 }
 
+
+int operation(int value1, int value2, char operatr) {
+
+	switch (operatr) {
+	case '+':
+		return (value2 + value1);
+		break;
+	case '*':
+		return (value2 * value1);
+		break;
+	case '-':
+		return (value2 - value1);
+		break;
+	case '/':
+		return (value2 / value1);
+		break;
+	}
+	return -1;
+}
+
+int evaluatePostfix(string postfix) {
+
+	Stack stack;
+	int postfixLength = postfix.length();
+	for (int i = 0; i < postfixLength; i++) {
+		
+		if (isOperand(postfix[i])) {
+			int value = postfix[i] - '0';
+			stack.push(value);
+		}
+		else {
+			int value1 = stack.peek();
+			stack.pop();
+			int value2 = stack.peek();
+			stack.pop();
+			int result = operation(value1, value2, postfix[i]);
+			stack.push(result);
+			
+		}
+	}
+	return stack.peek();
+}
+
+int main() {
+
+	string infix;
+	cout << "Enter proper infix expression : ";
+	getline(cin, infix);
+
+	string postfix = infixToPostfix(infix);
+	cout << "\npostfix expression of " << infix << " is : " << postfix << endl << endl;
+
+	int result = evaluatePostfix(postfix);
+	cout << "Result of the expression is  : " << result << endl << endl;
+
+	system("pause");
+}
