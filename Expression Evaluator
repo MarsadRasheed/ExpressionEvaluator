@@ -190,3 +190,53 @@ int precedenceOrder(char digit) {
 	}
 
 }
+
+// function to convert infix expression to postfix expression 
+
+string infixToPostfix(string expression) {
+
+	string postfix = "";
+	Stack stack;
+	int expressionLength = expression.length();
+
+	for (int i = 0; i < expressionLength; i++) {
+
+		if (expression[i] == ' ' || expression[i] == ',') {
+			continue;
+		}
+		else if (isOperand(expression[i])) {
+			
+			postfix += expression[i];
+		
+		}
+		else if (isOperator(expression[i])) {
+		
+			while (!stack.emptyStack() && precedenceOrder(expression[i]) <= precedenceOrder(stack.peek())) {
+				postfix += stack.peek();
+				stack.pop();
+			}
+			stack.push(expression[i]);
+		}
+		else if (expression[i] == '(') {
+			stack.push(expression[i]);
+		}
+		else if (expression[i] == ')') {
+
+			while (!stack.emptyStack() && stack.peek() != '(') {
+				postfix += stack.peek();
+				stack.pop();
+			}
+			stack.pop();
+
+		}
+	}
+
+	while (!stack.emptyStack()) {
+
+		postfix += stack.peek();
+		stack.pop();
+		
+	}	
+	return postfix;
+}
+
