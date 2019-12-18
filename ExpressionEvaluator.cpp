@@ -217,12 +217,28 @@ string infixToPostfix(string expression) {
 			}
 			stack.push(expression[i]);
 		}
-		else if (expression[i] == '(') {
+		else if (expression[i] == '('  || expression[i] == '{' || expression[i] == '[' ) {
 			stack.push(expression[i]);
 		}
 		else if (expression[i] == ')') {
 
 			while (!stack.emptyStack() && stack.peek() != '(') {
+				postfix += stack.peek();
+				stack.pop();
+			}
+			stack.pop();
+		}		else if (expression[i] == '}') {
+
+			while (!stack.emptyStack() && stack.peek() != '{') {
+				postfix += stack.peek();
+				stack.pop();
+			}
+			stack.pop();
+
+		}
+		else if (expression[i] == ']') {
+
+			while (!stack.emptyStack() && stack.peek() != '[') {
 				postfix += stack.peek();
 				stack.pop();
 			}
@@ -264,6 +280,13 @@ int evaluatePostfix(string postfix) {
 
 	Stack stack;
 	int postfixLength = postfix.length();
+
+	for (int i = 0; i < postfixLength; i++) {
+		if (postfix[i] == '[' || postfix[i] == '{' || postfix[i] == '(') {
+			return 0;
+		}
+	}
+	
 	for (int i = 0; i < postfixLength; i++) {
 		
 		if (isOperand(postfix[i])) {
@@ -290,10 +313,14 @@ int main() {
 	getline(cin, infix);
 
 	string postfix = infixToPostfix(infix);
-	cout << "\npostfix expression of " << infix << " is : " << postfix << endl << endl;
-
 	int result = evaluatePostfix(postfix);
-	cout << "Result of the expression is  : " << result << endl << endl;
-
+	
+	if ( result != 0 ) {
+		cout << "\npostfix expression of " << infix << " is : " << postfix << endl << endl;
+		cout << "Result of the expression is  : " << result << endl << endl;
+	}
+	else{
+		cout << "\nyou've given a wrong postfix " << endl;
+	}
 	system("pause");
 }
